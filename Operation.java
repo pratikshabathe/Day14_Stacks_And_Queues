@@ -4,28 +4,46 @@ import java.util.Scanner;
 
 public class Operation {
 
-	Node top = null;
+	int top;
+	int maxsize = 5;
+	int[] a = new int[maxsize];
 	
-	void push (Scanner scanner) {
+	boolean isEmpty(){
+		return (top < 0);
+	}
+	
+	void operation(){
+		top = -1;
+	}
+	boolean push (Scanner scanner) {
 		
-		System.out.println("Enter data: ");
-		int data = scanner.nextInt();
-		
-		Node newNode = new Node(data);
-		
-		if(top == null) {
-			top = newNode;
+		if(top == maxsize) {
+			System.out.println("Overflow");
+			return false;
 		}else {
-			newNode.next = top;
-			top = newNode;
+			System.out.println("Enter value");
+			int val = scanner.nextInt();
+			top++;
+			a[top] = val;
+			System.out.println("pushed value");
+			return true;
 		}
 	}
 	
+	boolean pop() {
+		if(top == -1) {
+			System.out.println("Underflow");
+			return false;
+		}else {
+			top--;
+			System.out.println("pop value");
+			return true;
+		}
+	}
 	void display() {
-		Node temp = top;
-		while(temp != null) {
-			System.out.println(temp.data);
-			temp = temp.next;
+		System.out.println("Printing stack element: ");
+		for(int i = top; i >= 0; i--) {
+			System.out.println(a[i]);
 		}
 	}
 }
